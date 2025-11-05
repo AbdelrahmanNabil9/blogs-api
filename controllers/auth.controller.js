@@ -5,7 +5,6 @@ const signUp = async (req, res, next) => {
 		await authService.signUp(req.body);
 		res.status(201).json({ message: "User created successfully" });
 	} catch (error) {
-		// Basic error handling
 		res.status(400).json({ message: error.message });
 	}
 };

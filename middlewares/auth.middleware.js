@@ -15,7 +15,6 @@ const authMiddleware = async (req, res, next) => {
 	try {
 		const payload = jwt.verify(token, process.env.JWT_SECRET);
 
-		// Attach user to the request object
 		req.user = await User.findById(payload.userId).select("-password");
 
 		if (!req.user) {
