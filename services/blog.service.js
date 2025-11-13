@@ -1,8 +1,11 @@
 const Blog = require("../models/blog.model");
 
 const createBlog = async (blogData, userId) => {
+	const { title, content, category } = blogData;
 	const blog = await Blog.create({
-		...blogData,
+		title,
+		content,
+		category,
 		owner: userId,
 	});
 	return blog;
@@ -55,7 +58,7 @@ const updateBlog = async (blogId, updateData, userId) => {
 		throw new Error("Forbidden: You can only edit your own blogs");
 	}
 
-	Object.assign(blog, updateData);
+	blog.set(updateData);
 	await blog.save();
 	return blog;
 };
